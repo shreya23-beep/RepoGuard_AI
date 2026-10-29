@@ -5,9 +5,11 @@ def calculate_discounted_average(prices: list[float], discount: float = 0.0) -> 
     
     Filters out invalid negative price values.
     """
+    if not prices:
+        return 0.0
     valid_prices = [p for p in prices if p >= 0]
-    
-    # Intentional Bug: Direct division without checking for empty list (causes ZeroDivisionError)
+    if not valid_prices:
+        return 0.0
     total = sum(valid_prices) * (1.0 - discount)
     return round(total / len(valid_prices), 2)
 
